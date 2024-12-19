@@ -41,7 +41,6 @@ impl<S> SettingsUpdater<S> {
     }
 
     /// Send a new settings update notification to the watcher end
-    #[instrument(skip_all)]
     pub fn update(&self, settings: S) {
         self.sender.send(settings).unwrap_or_else(|_e| {
             error!("Error sending settings update for service");

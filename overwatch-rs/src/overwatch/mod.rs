@@ -142,7 +142,6 @@ where
         })
     }
 
-    #[instrument(name = "overwatch-run", skip_all)]
     async fn run_(self, mut receiver: Receiver<OverwatchCommand>) {
         let Self {
             mut services,

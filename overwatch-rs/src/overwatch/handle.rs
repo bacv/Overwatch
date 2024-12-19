@@ -62,14 +62,12 @@ impl OverwatchHandle {
     }
 
     /// Send an overwatch command to the overwatch runner
-    #[instrument(name = "overwatch-command-send", skip(self))]
     pub async fn send(&self, command: OverwatchCommand) {
         if let Err(e) = self.sender.send(command).await {
             error!(error=?e, "Error sending overwatch command");
         }
     }
 
-    #[instrument(skip(self))]
     pub async fn update_settings<S: Services>(&self, settings: S::Settings)
     where
         S::Settings: Send,
